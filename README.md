@@ -17,3 +17,7 @@ Para o desenvolvimento do GameDame, foram utilizadas as seguintes tecnologias:
 - Express.js
 - Angular
 - MySQL
+
+## Estrutura de diretórios
+
+![alt text](https://i.imgur.com/OFHGCl8.png)
