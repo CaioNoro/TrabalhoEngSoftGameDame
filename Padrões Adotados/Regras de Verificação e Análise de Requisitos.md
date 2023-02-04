@@ -14,9 +14,9 @@
 - RF09: O sistema deve exibir uma tela com o catálogo dos jogos disponíveis;
 
 - RNF01: O sistema deve concluir operações de cadastro em até 10 segundos;
-- RNF01: O sistema deve concluir operações de login em até 5 segundos;
-- RNF02: A interface do sistema deve ser desenvolvido usando o framework Angular na versão 13;
-- RNF03: O back-end do sistema deve ser desenvolvido usando a plataforma Node.js na versão 19;
-- RNF04: O banco de dados utilizado deve ser o MySQL na versão 8.0;
+- RNF02: O sistema deve concluir operações de login em até 5 segundos;
+- RNF03: A interface do sistema deve ser desenvolvido usando o framework Angular na versão 13;
+- RNF04: O back-end do sistema deve ser desenvolvido usando a plataforma Node.js na versão 19;
+- RNF05: O banco de dados utilizado deve ser o MySQL na versão 8.0;
 
 >Os requisitos não devem ser ambíguos, sendo também verificáveis e consistentes. Portanto, os requisitos devem possuir apenas uma interpretação. Além disso, deve existir um processo finito com custo exequível que permita verificar se o produto construído atende os requisitos. E, por fim, deve ser feito com o objetivo de evitar contradições lógicas ou levar a resultados diferentes.
