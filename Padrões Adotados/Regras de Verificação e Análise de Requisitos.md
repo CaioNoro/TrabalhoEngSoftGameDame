@@ -13,7 +13,8 @@
 - RF08: O sistema deve permitir que administradores adicionem ofertas ao preço de jogos;
 - RF09: O sistema deve exibir uma tela com o catálogo dos jogos disponíveis;
 
-- RNF01: O sistema deve concluir operações de cadastro e login em até 3 segundos;
+- RNF01: O sistema deve concluir operações de cadastro em até 10 segundos;
+- RNF01: O sistema deve concluir operações de login em até 5 segundos;
 - RNF02: A interface do sistema deve ser desenvolvido usando o framework Angular na versão 13;
 - RNF03: O back-end do sistema deve ser desenvolvido usando a plataforma Node.js na versão 19;
 - RNF04: O banco de dados utilizado deve ser o MySQL na versão 8.0;
