@@ -1,0 +1,33 @@
+#loginTitle {
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 78px;
+    color: #4B626C;
+    padding-left: 10%;
+}
+
+#bottomTextCss {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #97A4A2;
+    pointer-events: none;
+}
+
+.fix-margin{
+    height: 1.5rem !important;
+}
+
+.fix-margin2{
+    height: 2rem !important;
+}
+
+
+.container-img{
+    width: 87%;
+}
+
+.container-img img{
+    max-width: 100%;
+    max-height: 100%;
+}
