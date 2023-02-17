@@ -19,5 +19,5 @@ Para o desenvolvimento do GameDame, foram utilizadas as seguintes tecnologias:
 ## Estrutura de diretórios
 
 - Server
-- Padões Adotados
+- Padrões Adotados
 - Requisitos
