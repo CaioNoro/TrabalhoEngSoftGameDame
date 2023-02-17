@@ -1,22 +1,11 @@
-# Requisitos de Projetos
+# Regras de Verificação e Análise de Requisitos
 
-- RF01: O sistema deve permitir o cadastro de clientes com e-mail e senha;
-- RF02: O sistema deve permitir o login de clientes com e-mail e senha;
-- RF03: O sistema deve permitir que o cliente adicione jogos ao seu carrinho de compras;
-- RF03.1: O sistema deve permitir que o cliente exclua jogos do seu carrinho de compras;
-- RF04: O sistema deve permitir que o cliente conclua a compra dos jogos em seu carrinho de compras;
-- RF05: O sistema deve permitir que o cliente adicione uma avaliação a jogos que ele tenha comprado previamente;
-- RF05.1: O sistema deve permitir que o cliente exclua uma avaliação feita a um jogo que ele tenha comprado previamente;
-- RF06: O sistema deve permitir que o cliente cancele uma compra previamente realizada;
-- RF07: O sistema deve permitir que administradores adicionem jogos ao catálogo;
-- RF07.1: O sistema deve permitir que administradores excluam jogos do catálogo;
-- RF08: O sistema deve permitir que administradores adicionem ofertas ao preço de jogos;
-- RF09: O sistema deve exibir uma tela com o catálogo dos jogos disponíveis;
+* Os requisitos não devem ser ambíguos.
 
-- RNF01: O sistema deve concluir operações de cadastro em até 10 segundos;
-- RNF02: O sistema deve concluir operações de login em até 5 segundos;
-- RNF03: A interface do sistema deve ser desenvolvido usando o framework Angular na versão 13;
-- RNF04: O back-end do sistema deve ser desenvolvido usando a plataforma Node.js na versão 19;
-- RNF05: O banco de dados utilizado deve ser o MySQL na versão 8.0;
+* Os requisitos devem ser rastreáveis, permitindo que sejam identificados e rastreados de volta ao objetivo original do produto ou sistema.
 
->Os requisitos não devem ser ambíguos, sendo também verificáveis e consistentes. Portanto, os requisitos devem possuir apenas uma interpretação. Além disso, deve existir um processo finito com custo exequível que permita verificar se o produto construído atende os requisitos. E, por fim, deve ser feito com o objetivo de evitar contradições lógicas ou levar a resultados diferentes.
+* Os requisitos devem ser consistentes e não devem entrar em conflito entre si.
+
+* Os requisitos devem ser mensuráveis e verificáveis para permitir que sejam testados e validados.
+
+* Os requisitos devem ser completos e abrangentes, cobrindo todas as funcionalidades e características necessárias para atender às necessidades do usuário.

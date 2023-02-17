@@ -12,12 +12,12 @@ O sistema foi desenvolvido especialmente para jogadores de videogames e pessoas 
 
 Para o desenvolvimento do GameDame, foram utilizadas as seguintes tecnologias:
 
-- JavaScript
-- Node.js
-- Express.js
-- Angular
-- MySQL
+- Python 3
+- Django 4
+- SQLite 3
 
 ## Estrutura de diretórios
 
-![alt text](https://i.imgur.com/OFHGCl8.png)
+- Server
+- Padrões Adotados
+- Requisitos
