@@ -13,3 +13,18 @@ def perfilView(request):
     games = PurchaseItem.objects.filter(
         purchase__user=request.user).exclude(refunded=True)
     return render(request, 'accounts/account.html', {'user': request.user, 'games': games})
+
+def loginUserView(request):
+    if request.method == "POST":
+        form = LoginForm(request, data=request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('game-list')
+        else:
+            return redirect('login')
+    else:
+        form = LoginForm()
+        return render(request, 'accounts/login.html', {'form': form})
