@@ -38,3 +38,8 @@ def registerUserView(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})
+
+def logoutUserView(request):
+    logout(request)
+    return redirect('game-list')
+
