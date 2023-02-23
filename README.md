@@ -15,6 +15,7 @@ Para o desenvolvimento do GameDame, foram utilizadas as seguintes tecnologias:
 - Python 3
 - Django 4
 - SQLite 3
+- Bootstrap 5
 
 ## Estrutura de diretórios
 
