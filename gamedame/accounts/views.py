@@ -28,3 +28,13 @@ def loginUserView(request):
     else:
         form = LoginForm()
         return render(request, 'accounts/login.html', {'form': form})
+    
+def registerUserView(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'accounts/register.html', {'form': form})
