@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block title %}{{game.title}}{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <div class="row rounded">
+    <div class="col-md-6">
+      <div class="rounded">
+        <img src="{{ game.cover_image.url }}" alt="{{ game.title }}" class="w-100">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h1 class="mb-3">{{ game.title }}</h1>
+
+      <div class="mb-3">
+        {% if game.promotion > 0 %}
+        <del class="text-muted mr-2">R$ {{ game.price }}</del>
+        <span class="text-danger h4">R$ {{ game.price_with_discount }}</span>
+        {% else %}
+        <span class="h4">R$ {{ game.price }}</span>
+        {% endif %}
+      </div>
+
+      <p class="mb-4">{{ game.description }}</p>
+      {% if has_purchased %}
+      <button type="button" class="btn btn-secondary btn-block mb-3" disabled>Você já comprou este jogo</button>
+      <a href=" {% url 'refund-game' game.id %} " id="refund-button" class="mb-3 btn btn-danger btn-block">Pedir
+        reembolso</a>
+      {% else %}
+      {% if is_in_cart %}
+      <button type="button" class="btn btn-secondary btn-block mb-3" disabled>Este jogo já está no carrinho</button>
+      {% else %}
+      <a href="{% url 'add_to_cart' game.id %}" id="cart-button" class="mb-3 btn btn-primary btn-block">Adicionar ao
+        carrinho</a>
+      {% endif %}
+
+      {% endif %}
+      <div class="mb-3">
+        <h5 class = "mb-0">Nota: {{ rating_sum }}/100 </h5>
+        <small>(Nº de avaliações: {{num_ratings}})</small>
+        {% if user_rating %}
+        <h6>Sua nota: {{user_rating}}</h6>
+        {% endif %}
+      </div>
+      {% if has_purchased %}
+      <div class="form-outline mb-3 ">
+        <form method="post" action="{% url 'add_rating' game.id %}">
+            {% csrf_token %}
+            <label class="form-label" for="id_rating">Adicione uma nota (0/100):</label>
+            <div class="w-25">
+                <input type="number" id="id_rating" name="rating" class="form-control" min="0" max="100" required>
+                <label class="form-label" for="id_rating"></label>
+              <button type="submit" class="btn btn-primary mt-2">Enviar</button>
+            </div>
+            
+        </form>
+    </div>
+    {% endif %}
+    
+
+      
+    </div>
+  </div>
+</div>
+
+{% endblock %}

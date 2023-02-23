@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block title %}{{game.title}}{% endblock %}
+{% block content %}
+<div class="container p-3" id="shopping-cart">
+    <h1 class="pb-3 category-title">Carrinho de compras</h1>
+  {% if cart_items %}
+  <div class="row">
+    {% for game in cart_items %}
+    <div class="col-md-3 mb-3">
+      <a href="/game/{{game.game.id}}" class="text-decoration-none">
+        <div class="card game-card">
+          <img src="{{game.game.cover_image.url}}" class="card-img-top" alt="Imagem 1" />
+          <div class="card-body">
+            <h5 class="card-title text-truncate">{{game.game.title}}</h5>
+            <p class="card-text">R$ {{game.game.price_with_discount}}</p>
+            <a class="btn btn-outline-danger btn-sm mt-2" href="{% url 'remove_cart_item' game.pk %}">Remover</a>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+
+    <div class="card mb-3">
+      <div class="card-body">
+
+        <div class="float-end">
+          <p class="mb-0 me-5 d-flex align-items-center">
+            <span class="small text-muted me-2">Total:</span> <span class="lead fw-normal">R${{ total }}</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <a class="btn btn-primary mx-3" href="{% url 'game-list' %}">Continue comprando</a>
+      <a class="btn btn-primary" href="{% url 'purchase' %}">Comprar</a>
+    </div>
+
+  </div>
+  {% else %}
+  <p class="category-title">O seu carrinho está vazio.</p>
+  {% endif %}
+</div>
+
+
+
+{% endblock %}
