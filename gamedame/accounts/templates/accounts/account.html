@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Game Dame{% endblock %}
+{% block content %}
+<div class="container p-3" id="bought-games">
+    <div class="category-title" id="user-profile">
+        <h1 style = "font-size: 60px">Olá, {{ user.first_name }} {{ user.last_name }}!</h1> 
+    </div>
+    {% if games %}
+        <h1 class="pb-3 category-title">Jogos comprados</h1>
+        <div class="row">
+            {% for game in games %}
+                <div class="col-md-3 mb-3">
+                    <a href="/game/{{game.game.id}}" class="text-decoration-none">
+                        <div class="card game-card">
+                            <img src="{{game.game.cover_image.url}}" class="card-img-top" alt="Imagem 1" />
+                            <div class="card-body">
+                                <h5 class="card-title text-truncate">{{game.game.title}}</h5>
+                                <p class="card-text">R$ {{game.price}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    <div class="p-3" id="user-profile">
+        <p>Você ainda não comprou nenhum jogo.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
