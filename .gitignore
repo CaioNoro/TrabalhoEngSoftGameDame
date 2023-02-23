@@ -1,0 +1,13 @@
+# Arquivos e diretórios gerados pelo sistema Django
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db.sqlite3
+
+# Arquivos e diretórios gerados pelo sistema Django
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db.sqlite3
