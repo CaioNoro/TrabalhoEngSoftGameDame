@@ -93,3 +93,15 @@ def removecartItemView(request, pk):
     cart_item = get_object_or_404(CartItem, pk=pk, user=request.user)
     cart_item.delete()
     return redirect('cart-view')
+
+@login_required
+def addcartItemView(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+
+    # Verifica se o jogo já está no carrinho
+    try:
+        cart_item = CartItem.objects.get(user=request.user, game=game)
+        return HttpResponseBadRequest('<script>alert("Este jogo já está no carrinho."); window.history.back();</script>')
+    except CartItem.DoesNotExist:
+        CartItem.objects.create(user=request.user, game=game)
+        return redirect('/cart')
