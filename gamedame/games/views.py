@@ -22,3 +22,16 @@ def gameList(request):
         'random_games' : random_games,
     }
     return render(request, 'games/list.html', context)
+
+def allGamesView(request):
+    all_games_list = Game.objects.all()
+    
+    paginator = Paginator(all_games_list, 4)
+    page = request.GET.get('page')
+    all_games = paginator.get_page(page)
+    
+    context = {
+        'all_games' : all_games,
+        'all_games_list' : all_games_list,
+    }
+    return render(request, 'games/all-games.html', context)
