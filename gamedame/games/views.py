@@ -105,3 +105,27 @@ def addcartItemView(request, game_id):
     except CartItem.DoesNotExist:
         CartItem.objects.create(user=request.user, game=game)
         return redirect('/cart')
+    
+@login_required
+def purchaseView(request):
+    user = request.user
+    cart_items = CartItem.objects.filter(user=user)
+
+    if cart_items:
+        # Cria um objeto Purchase
+        purchase = Purchase.objects.create(user=user)
+
+        # Cria objetos PurchaseItem para cada item do carrinho
+        for cart_item in cart_items:
+            game = cart_item.game
+            price = game.price_with_discount()
+            PurchaseItem.objects.create(
+                game=game, purchase=purchase, price=price)
+
+        # Remove os itens do carrinho
+        cart_items.delete()
+
+        return redirect('/')
+    else:
+        # Se o carrinho está vazio, redireciona de volta para o carrinho
+        return redirect('cart')
