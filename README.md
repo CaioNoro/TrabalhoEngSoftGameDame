@@ -22,3 +22,4 @@ Para o desenvolvimento do GameDame, foram utilizadas as seguintes tecnologias:
 - gamedame
 - Padrões Adotados
 - Requisitos
+- Diagramas
