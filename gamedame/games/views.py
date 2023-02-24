@@ -48,3 +48,29 @@ def searchGamesView(request):
     }
 
     return render(request, 'games/search-games.html', context)
+
+@login_required
+def gameView(request, id):
+    game = get_object_or_404(Game, pk=id)
+    has_purchased = PurchaseItem.objects.filter(
+        purchase__user=request.user, game=game, refunded=False).exists()
+    is_in_cart = CartItem.objects.filter(user=request.user, game=game).exists()
+
+    # Busca todas as avaliações para o jogo e calcula a média das notas
+    ratings = Rating.objects.filter(game=game)
+    rating_sum = int(ratings.aggregate(avg_rating=Avg('rating'))['avg_rating'] or 0)
+    num_ratings = ratings.count()
+
+    # Obtém a avaliação do usuário, se houver
+    user_rating = Rating.objects.filter(game=game, user=request.user).first()
+
+    context = {
+        'game': game, 
+        'has_purchased': has_purchased, 
+        'is_in_cart': is_in_cart, 
+        'rating_sum': rating_sum,
+        'user_rating': user_rating.rating if user_rating else None,
+        'num_ratings': num_ratings,
+    }      
+
+    return render(request, 'games/game.html', context)
