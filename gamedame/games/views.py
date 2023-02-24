@@ -87,3 +87,9 @@ def cartView(request):
         'total': total
     }
     return render(request, 'games/cart.html', context)
+
+@login_required
+def removecartItemView(request, pk):
+    cart_item = get_object_or_404(CartItem, pk=pk, user=request.user)
+    cart_item.delete()
+    return redirect('cart-view')
