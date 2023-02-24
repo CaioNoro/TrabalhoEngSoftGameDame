@@ -74,3 +74,16 @@ def gameView(request, id):
     }      
 
     return render(request, 'games/game.html', context)
+
+@login_required
+def cartView(request):
+    user_cart = CartItem.objects.filter(user=request.user)
+    cart_items = CartItem.objects.filter(user=request.user)
+    total = 0
+    for item in cart_items:
+        total += item.game.price_with_discount()
+    context = {
+        'cart_items': user_cart,
+        'total': total
+    }
+    return render(request, 'games/cart.html', context)
