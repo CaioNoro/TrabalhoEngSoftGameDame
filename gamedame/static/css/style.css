@@ -1,0 +1,108 @@
+.container-fluid {
+    padding: 0;
+}
+
+.navbar {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/*
+.navbar-nav {
+    margin: auto;
+}*/
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* Lista de games */
+
+.list-div {
+    padding: 0;
+}
+
+.game-list {
+    padding-left: 0;
+}
+
+.game-item {
+    list-style: none;
+    font-size: 20px;
+    height: 150px;
+    border: 1px solid #c5c5c5;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: #dfdfdf;
+}
+
+.game-img-list {
+    height: 150px;
+    border-radius: 5px;
+}
+
+.carousel-size {
+    width: 800px;
+}
+
+.rounded {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.card-body {
+    min-height: 128px;
+    /* adjust as needed */
+}
+
+/* Login */
+
+.auth-card {
+    margin-bottom: 30px;
+}
+
+.container-fluid .row {
+    margin: 0;
+}
+
+.change-form-p {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.change-form-p a {
+    text-decoration: none;
+    padding-left: 5px;
+}
+
+.game-card{
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+}
+
+.game-card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.category-title {
+    padding-left: calc(var(--bs-gutter-x) * .5);
+}
+
+/* Paginação do Allgames */
+
+.pagination {
+    margin-bottom: 20px;
+}
+
+.step-links {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.step-links .current{
+    margin-left: 5px;
+    margin-right: 5px;
+}
