@@ -129,3 +129,17 @@ def purchaseView(request):
     else:
         # Se o carrinho está vazio, redireciona de volta para o carrinho
         return redirect('cart')
+    
+@login_required
+def refundGameView(request, game_id):
+    # obtém o jogo a ser reembolsado
+    game = get_object_or_404(Game, id=game_id)
+
+    # processa o reembolso do jogo
+    purchase_items = PurchaseItem.objects.filter(
+        game=game, purchase__user=request.user)
+    for purchase_item in purchase_items:
+        purchase_item.refunded = True
+        purchase_item.save()
+
+    return redirect('perfil-view')
