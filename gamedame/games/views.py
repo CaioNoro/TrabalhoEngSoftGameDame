@@ -35,3 +35,16 @@ def allGamesView(request):
         'all_games_list' : all_games_list,
     }
     return render(request, 'games/all-games.html', context)
+
+def searchGamesView(request):
+    search = request.GET.get('search')
+    searched_games = []
+
+    if (search):
+        searched_games = Game.objects.filter(Q(title__icontains=search))
+
+    context = {
+        'searched_games': searched_games
+    }
+
+    return render(request, 'games/search-games.html', context)
