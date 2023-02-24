@@ -143,3 +143,15 @@ def refundGameView(request, game_id):
         purchase_item.save()
 
     return redirect('perfil-view')
+
+@login_required
+def add_rating(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+    user = request.user
+    rating = int(request.POST.get('rating', 0))
+
+    if rating >= 0:
+        rating, created = Rating.objects.update_or_create(
+            user=user, game=game, defaults={'rating': rating})
+
+    return redirect('game-view', id=game.id)
