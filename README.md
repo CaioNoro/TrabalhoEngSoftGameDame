@@ -23,6 +23,7 @@ Para o desenvolvimento do GameDame, foram utilizadas as seguintes tecnologias:
 - Padrões Adotados
 - Requisitos
 - Diagramas
+- Teste
 
 ## Padrões de Uso do Git
 
