@@ -6,21 +6,20 @@
     <h1 class = "pb-3 category-title">Pesquisado: "{{request.GET.search}}"</h1>
     <div class="row">
         {% for game in searched_games %}
-        <div class="col-md-3 mb-3">
+        <div class="col-md-3 mb-3 ">
             <a href="/game/{{game.id}}" class="text-decoration-none">
                 <div class="card game-card">
                     <img src="{{game.cover_image.url}}" class="card-img-top" alt="Imagem 1" />
                     <div class="card-body">
                         <h5 class="card-title text-truncate">{{game.title}}</h5>
-                        <p class="card-text">R$ {{game.price_with_discount}}</p>
                         {% if game.promotion > 0 %}
+                            <del class="text-muted mr-2">R$ {{ game.price }}</del>
+                            <span class="text-danger h6">R$ {{ game.price_with_discount }}</span>
                         <p class="card-text">
-                            <small class="text-muted">{{game.promotion}}% de desconto!</small>
+                            <small class="text-muted ">{{game.promotion}}% de desconto!</small>
                         </p>
                         {% else %}
-                        <p class="card-text">
-                            <small class="text-muted"></small>
-                        </p>
+                            <p class="card-text">R$ {{game.price}}</p>
                         {% endif %}
                     </div>
                 </div>
