@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 
 from .models import CartItem, Game, Purchase, PurchaseItem, Rating
 
+# Retorna a página principal do sistema
 def gameList(request):
     all_games = Game.objects.all()
     
@@ -23,6 +24,7 @@ def gameList(request):
     }
     return render(request, 'games/list.html', context)
 
+# Retorna uma página com todos os jogos do sistemma (utiliza o Paginator para criar páginas dentro página)
 def allGamesView(request):
     all_games_list = Game.objects.all()
     
@@ -36,6 +38,7 @@ def allGamesView(request):
     }
     return render(request, 'games/all-games.html', context)
 
+# Retorna a página com os jogos que possuem a palavra-chave pesquisada pelo usuário
 def searchGamesView(request):
     search = request.GET.get('search')
     searched_games = []
@@ -49,6 +52,7 @@ def searchGamesView(request):
 
     return render(request, 'games/search-games.html', context)
 
+# Retorna a página de um jogo qualquer
 @login_required
 def gameView(request, id):
     game = get_object_or_404(Game, pk=id)
@@ -75,6 +79,7 @@ def gameView(request, id):
 
     return render(request, 'games/game.html', context)
 
+# Retorna a página do carrinho de compra
 @login_required
 def cartView(request):
     user_cart = CartItem.objects.filter(user=request.user)
@@ -88,12 +93,14 @@ def cartView(request):
     }
     return render(request, 'games/cart.html', context)
 
+# Faz a remoção de um item do carrinho no banco de dados
 @login_required
 def removecartItemView(request, pk):
     cart_item = get_object_or_404(CartItem, pk=pk, user=request.user)
     cart_item.delete()
     return redirect('cart-view')
 
+# Faz a adição de um item no carrinho
 @login_required
 def addcartItemView(request, game_id):
     game = get_object_or_404(Game, id=game_id)
@@ -106,6 +113,7 @@ def addcartItemView(request, game_id):
         CartItem.objects.create(user=request.user, game=game)
         return redirect('/cart')
     
+# Realiza a compra do usuário    
 @login_required
 def purchaseView(request):
     user = request.user
@@ -130,6 +138,7 @@ def purchaseView(request):
         # Se o carrinho está vazio, redireciona de volta para o carrinho
         return redirect('cart')
     
+# Faz o reembolso de um jogo
 @login_required
 def refundGameView(request, game_id):
     # obtém o jogo a ser reembolsado
@@ -144,6 +153,7 @@ def refundGameView(request, game_id):
 
     return redirect('perfil-view')
 
+# Adiciona uma aviliação a um jogo
 @login_required
 def add_rating(request, game_id):
     game = get_object_or_404(Game, id=game_id)

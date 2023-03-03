@@ -12,6 +12,3 @@ urlpatterns = [
     path('profile/', views.perfilView, name = 'perfil-view'),
     path('change-password/', PasswordChangeView.as_view(), name='change-password')
 ]
-
-
-""" urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) """

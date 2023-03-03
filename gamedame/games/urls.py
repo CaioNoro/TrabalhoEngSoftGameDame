@@ -15,5 +15,3 @@ urlpatterns = [
     path('refund/<int:game_id>', views.refundGameView, name='refund-game'),
     path('allgames/', views.allGamesView, name = "all_games")
 ]
-
-# urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

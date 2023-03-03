@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
+# Formulário modifcado de registro de usuário
+# Adiciona os campos: first_name, last_name e email
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Obrigatório.')
     last_name = forms.CharField(max_length=30, required=True, help_text='Obrigatório.')
@@ -29,6 +31,7 @@ class CustomUserCreationForm(UserCreationForm):
             'password2': 'Digite a mesma senha novamente para verificação.'
         }
 
+# Formulário modifcado de login de usuário
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
         label="Nome de usuário",

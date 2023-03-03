@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-
+# Modelo que representa o jogo no sistema
 class Game(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -20,19 +20,20 @@ class Game(models.Model):
     def price_with_discount(self):
         return round(self.price * (1 - self.promotion/100), 2)
 
-
+# Modelo que representa a compra de vários jogos no sistema
 class Purchase(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     purchase_date = models.DateTimeField(auto_now_add=True)
 
-
+# Modelo que representa a compra de um jogo no sistema (tabela auxiliar para o atributo
+# multivalorado que representa os jogos comprados de Purchase)
 class PurchaseItem(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     refunded = models.BooleanField(default=False)
 
-
+# Modelo que representa o carrinho de compras
 class CartItem(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
@@ -41,6 +42,7 @@ class CartItem(models.Model):
     def __str__(self):
         return f'{self.game.title} ({self.user.username})'
     
+# Modelo que representa as avaliacoes dos usuários em relações ao jogos
 class Rating(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)

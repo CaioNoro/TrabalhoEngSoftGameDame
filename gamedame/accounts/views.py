@@ -8,12 +8,14 @@ from accounts.forms import CustomUserCreationForm, LoginForm
 
 from games.models import PurchaseItem
 
+#Retorna a página da conta do usuário
 @login_required
 def perfilView(request):
     games = PurchaseItem.objects.filter(
         purchase__user=request.user).exclude(refunded=True)
     return render(request, 'accounts/account.html', {'user': request.user, 'games': games})
 
+#Retorna a página de login de usuário
 def loginUserView(request):
     if request.method == "POST":
         form = LoginForm(request, data=request.POST)
@@ -29,6 +31,7 @@ def loginUserView(request):
         form = LoginForm()
         return render(request, 'accounts/login.html', {'form': form})
     
+#Retorna a página de registro de usuário
 def registerUserView(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -39,6 +42,7 @@ def registerUserView(request):
         form = CustomUserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})
 
+#Desloga o usuário do sistema
 def logoutUserView(request):
     logout(request)
     return redirect('game-list')
