@@ -2,12 +2,12 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 
+# Setup
 servico = Service(ChromeDriverManager().install())
-
 navegador = webdriver.Chrome(service=servico)
 
+# Teste de pesquisa
 navegador.get("http://127.0.0.1:8000/")
-
 navegador.find_element('xpath', '//*[@id="search"]').send_keys('of')
 navegador.find_element('xpath', '//*[@id="search-form"]/button').click()
 
@@ -18,13 +18,11 @@ flag = 1
 while (flag):
     flag = input()
 
-
+# Teste de adicionar no carrinho
 navegador.get("http://127.0.0.1:8000/accounts/login/")
 navegador.find_element('xpath', '//*[@id="id_username"]').send_keys('teste')
-navegador.find_element(
-    'xpath', '//*[@id="id_password"]').send_keys('Senhadeteste2023')
-navegador.find_element(
-    'xpath', '/html/body/div/div/div/div/div/form/button').click()
+navegador.find_element('xpath', '//*[@id="id_password"]').send_keys('Senhadeteste2023')
+navegador.find_element('xpath', '/html/body/div/div/div/div/div/form/button').click()
 navegador.get("http://127.0.0.1:8000/accounts/login/")
 navegador.get("http://127.0.0.1:8000/game/7")
 navegador.find_element('xpath', '//*[@id="cart-button"]').click()
@@ -36,8 +34,13 @@ flag = 1
 while (flag):
     flag = input()
 
-navegador.find_element('xpath', '//*[@id="shopping-cart"]/div/div[1]/div/div/a[2]').click()
+
+# Remove o jogo do carrinho e dá logout para evitar problemas no próximo test
+navegador.find_element(
+    'xpath', '//*[@id="shopping-cart"]/div/div[1]/div/div/a[2]').click()
 navegador.get('http://127.0.0.1:8000/accounts/logout/')
+
+# Teste de registro errado
 navegador.get('http://127.0.0.1:8000/accounts/register/')
 navegador.find_element('xpath', '//*[@id="id_username"]').send_keys('Albert')
 navegador.find_element(
