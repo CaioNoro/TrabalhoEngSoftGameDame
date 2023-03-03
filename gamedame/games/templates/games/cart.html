@@ -21,26 +21,39 @@
 
     <div class="card mb-3">
       <div class="card-body">
-
+    
+        <form method="POST" action="{% url 'update-cart-item'%}" class="float-start">
+          {% csrf_token %}
+          <div class="form-group">
+              <label for="game_id_original">ID do jogo original:</label>
+              <input type="number" class="form-control" id="game_id_original" name="original">
+          </div>
+          <div class="form-group">
+              <label for="game_id_new">ID do novo jogo:</label>
+              <input type="number" class="form-control" id="game_id_new" name="new">
+          </div>
+                  
+          <input type="submit" class="btn btn-primary" value="Atualizar carrinho">
+        </form>
+          
         <div class="float-end">
           <p class="mb-0 me-5 d-flex align-items-center">
             <span class="small text-muted me-2">Total:</span> <span class="lead fw-normal">R${{ total }}</span>
           </p>
+    
+          <div class="d-flex justify-content-end">
+            <a class="btn btn-primary mx-3" href="{% url 'game-list' %}">Continue comprando</a>
+            <a class="btn btn-primary" href="{% url 'purchase' %}">Comprar</a>
+          </div>
         </div>
-
+    
       </div>
     </div>
-
-    <div class="d-flex justify-content-end">
-      <a class="btn btn-primary mx-3" href="{% url 'game-list' %}">Continue comprando</a>
-      <a class="btn btn-primary" href="{% url 'purchase' %}">Comprar</a>
-    </div>
-
-  </div>
-  {% else %}
-  <p class="category-title">O seu carrinho está vazio.</p>
-  {% endif %}
-</div>
+    
+    {% else %}
+    <p class="category-title">O seu carrinho está vazio.</p>
+    {% endif %}
+    
 
 
 

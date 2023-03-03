@@ -106,3 +106,35 @@
     margin-left: 5px;
     margin-right: 5px;
 }
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 10px;
+    font-size: 16px;
+    border: 1px solid rgb(177, 177, 177);
+    border-radius: 10px;
+}
+
+.messages li {
+    margin: 5px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+}
+
+.messages li.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.messages li.error a {
+    color: #721c24;
+    text-decoration: underline;
+}
+
+.messages li.error a:hover {
+    color: #721c24;
+    text-decoration: none;
+}

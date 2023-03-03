@@ -4,6 +4,10 @@ from django.db.models import Q, Avg
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
+from django.contrib import messages
+
+
 
 from .models import CartItem, Game, Purchase, PurchaseItem, Rating
 
@@ -113,6 +117,27 @@ def addcartItemView(request, game_id):
         CartItem.objects.create(user=request.user, game=game)
         return redirect('/cart')
     
+@login_required
+def updatecartitemView(request):
+    original_game = get_object_or_404(Game, id=request.POST.get('original'))
+    new_game = get_object_or_404(Game, id=request.POST.get('new'))
+
+    try:
+        cart_item = CartItem.objects.get(user=request.user, game=original_game)
+    except CartItem.DoesNotExist:
+        return HttpResponseBadRequest('<script>alert("Este jogo não está no carrinho."); window.history.back();</script>')
+
+    # Verifica se o novo jogo já está no carrinho
+    if CartItem.objects.filter(user=request.user, game=new_game).exists():
+        return HttpResponseBadRequest('<script>alert("Este jogo já está no carrinho."); window.history.back();</script>')
+
+    # Atualiza o item do carrinho com o novo jogo
+    cart_item.game = new_game
+    cart_item.save()
+
+    return redirect('cart-view')
+
+    
 # Realiza a compra do usuário    
 @login_required
 def purchaseView(request):
@@ -165,3 +190,47 @@ def add_rating(request, game_id):
             user=user, game=game, defaults={'rating': rating})
 
     return redirect('game-view', id=game.id)
+
+@login_required
+def rating_menu(request):
+    ratings = Rating.objects.all()
+    return render(request, 'games/rating-menu.html', {'ratings': ratings})
+
+@login_required
+def rating_item(request, rating_id):
+    rating = get_object_or_404(Rating, pk=rating_id)
+    return render(request, 'games/rating.html', {'rating': rating})
+
+@login_required
+def delete_rating(request, rating_id):
+    rating = get_object_or_404(Rating, id=rating_id)
+    rating.delete()
+    return redirect('/ratingmenu')
+
+@login_required
+def update_rating_view(request, rating_id):
+    rating = get_object_or_404(Rating, id=rating_id)
+
+    user_username = request.POST.get('user')
+    game_title = request.POST.get('game')
+    new_rating = request.POST.get('rating')
+
+    try:
+        user = User.objects.get(username=user_username)
+    except User.DoesNotExist:
+        messages.error(request, 'Usuário não encontrado.')
+        return redirect('/ratingmenu')
+
+    try:
+        game = Game.objects.get(title=game_title)
+    except Game.DoesNotExist:
+        messages.error(request, 'Jogo não encontrado.')
+        return redirect('/ratingmenu')
+
+    rating.user = user
+    rating.game = game 
+    rating.rating = new_rating
+    rating.save()
+
+    messages.success(request, 'Avaliação atualizada com sucesso.')
+    return redirect('/ratingmenu')

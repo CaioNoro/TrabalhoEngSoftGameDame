@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Rating Item{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-center" style="height: 100vh;">
+        <form method="post" action="{% url 'update-rating' rating.id%}">
+            {% csrf_token %}
+            <input type="hidden" name="rating_id" value="{{ rating.id }}">
+            <div class="form-group">
+                <label for="user">Usuário:</label>
+                <input type="text" class="form-control" id="user" name="user" value="{{ rating.user.username }}">
+            </div>
+            <div class="form-group">
+                <label for="game">Jogo:</label>
+                <input type="text" class="form-control" id="game" name="game" value="{{ rating.game.title }}">
+            </div>
+            <div class="form-group">
+                <label for="rating">Nota:</label>
+                <input type="number" class="form-control" id="rating" name="rating" min="0" max="100" value="{{ rating.rating }}">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mr-2">Atualizar</button>
+                <a href="{% url 'delete-rating' rating.id %}" class="btn btn-danger">Excluir</a>
+            </div>
+        </form>
+        
+    </div>
+{% endblock %}
