@@ -191,16 +191,19 @@ def add_rating(request, game_id):
 
     return redirect('game-view', id=game.id)
 
+# Retorna a página que mostra todas as avaliações
 @login_required
 def rating_menu(request):
     ratings = Rating.objects.all()
     return render(request, 'games/rating-menu.html', {'ratings': ratings})
 
+# Retorna a página que mostra todas as informações de uma avaliação
 @login_required
 def rating_item(request, rating_id):
     rating = get_object_or_404(Rating, pk=rating_id)
     return render(request, 'games/rating.html', {'rating': rating})
 
+# Redireciona para a página da avaliação pesquisada
 @login_required
 def search_rating_item(request):
     search = request.GET.get('search_rating')
@@ -208,12 +211,14 @@ def search_rating_item(request):
 
     return redirect(url)
 
+# Delete uma avaliação
 @login_required
 def delete_rating(request, rating_id):
     rating = get_object_or_404(Rating, id=rating_id)
     rating.delete()
     return redirect('/ratingmenu')
 
+# Adiciona uma avaliação
 @login_required
 def add_rating(request):
     if request.method == 'POST':
@@ -240,8 +245,7 @@ def add_rating(request):
     else:
         return render(request, 'games/add-rating.html')
 
-
-
+# Atualiza uma avaliação
 @login_required
 def update_rating_view(request, rating_id):
     rating = get_object_or_404(Rating, id=rating_id)
@@ -270,22 +274,26 @@ def update_rating_view(request, rating_id):
     messages.success(request, 'Avaliação atualizada com sucesso.')
     return redirect('/ratingmenu')
 
+# Retorna a página que mostra todas os jogos
 @login_required
 def games_menu(request):
     games = Game.objects.all()
     return render(request, 'games/games-menu.html', {'games': games})
 
+# Retorna a página que mostra todas as informações de um jogo
 @login_required
 def game_item(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     return render(request, 'games/game-item-adm.html', {'game': game})
 
+# Remove um jogo
 @login_required
 def delete_game(request, game_id):
     game = get_object_or_404(Game, id=game_id)
     game.delete()
     return redirect('/gamesmenu')
 
+# Atualiza um jogo
 @login_required
 def update_game_view(request, game_id):
     game = get_object_or_404(Game, id=game_id)
@@ -325,6 +333,7 @@ def update_game_view(request, game_id):
     except ValueError as e:
         messages.error(request, str(e))
 
+# Adiciona um jogo
 @login_required
 def add_game(request):
     if request.method == 'POST':
