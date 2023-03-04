@@ -20,6 +20,10 @@
             <li class="list-group-item">Nenhum rating cadastrado.</li>
         {% endfor %}
         <a href = "/ratingmenu/add/" class="btn btn-primary">Adicionar Avaliação</a>
+        <form class="d-flex" role="search" method="GET" id="search_rating_form" action="{% url 'search-rating-item' %}">
+            <input class="form-control me-2" type="text" id="search_rating" name="search_rating" placeholder="Pesquisar Avaliaçao">
+            <button class="btn btn-outline-primary me-2" type="submit">Pesquisar</button>
+        </form>
     </ul>
     
 </div>

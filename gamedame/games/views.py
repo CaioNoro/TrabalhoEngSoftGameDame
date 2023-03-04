@@ -202,6 +202,13 @@ def rating_item(request, rating_id):
     return render(request, 'games/rating.html', {'rating': rating})
 
 @login_required
+def search_rating_item(request):
+    search = request.GET.get('search_rating')
+    url = "/rating/" + str(search)
+
+    return redirect(url)
+
+@login_required
 def delete_rating(request, rating_id):
     rating = get_object_or_404(Rating, id=rating_id)
     rating.delete()
