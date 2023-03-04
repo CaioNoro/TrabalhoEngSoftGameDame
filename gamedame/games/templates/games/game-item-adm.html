@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Rating Item{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-center" style="height: 100vh;">
+            <form method="post" action="{% url 'update-game' game.id%}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="game_id" value="{{ game.id }}">
+                <div class="form-group">
+                    <label for="title">Título:</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ game.title }}">
+                </div>
+                <div class="form-group">
+                    <label for="description">Descrição:</label>
+                    <textarea class="form-control" id="description" name="description">{{ game.description }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Preço:</label>
+                    <input type="number" class="form-control" id="price" name="price" step="0.01" value="{{ game.price }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="promotion">Promoção:</label>
+                    <input type="number" class="form-control" id="promotion" name="promotion" min="0" max="100" value="{{ game.promotion }}">
+                </div>
+                <div class="form-group">
+                    <label for="release_date">Data de lançamento:</label>
+                    <input type="date" class="form-control" id="release_date" name="release_date" value="{{ game.release_date|date:'Y-m-d'}}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="cover_image">Imagem de capa:</label>
+                    <input type="file" class="form-control" id="cover_image" name="cover_image" value="{{ game.cover_image.url}}">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary mr-2">Atualizar</button>
+                    <a href="{% url 'delete-game' game.id %}" class="btn btn-danger">Excluir</a>
+                </div>
+            </form>
+        
+    </div>
+{% endblock %}

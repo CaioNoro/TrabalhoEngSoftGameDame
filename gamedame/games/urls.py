@@ -19,4 +19,10 @@ urlpatterns = [
     path('rating/<int:rating_id>', views.rating_item , name = "rating_item"), 
     path('rating/<int:rating_id>/delete/', views.delete_rating, name='delete-rating'),
     path('rating/<int:rating_id>/update/', views.update_rating_view, name='update-rating'),
+    path('ratingmenu/add/', views.add_rating, name='add-rating'),
+    path('gamesmenu/', views.games_menu, name = "games_menu"),
+    path('gamesadm/<int:game_id>', views.game_item , name = "game_item"), 
+    path('gamesadm/<int:game_id>/delete/', views.delete_game, name='delete-game'),
+    path('gamesadm/<int:game_id>/update/', views.update_game_view, name='update-game'),
+    path('gamesadm/add/', views.add_game, name='add-game'),
 ]

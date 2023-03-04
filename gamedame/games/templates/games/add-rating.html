@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Adicionar Rating{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-center" style="height: 100vh;">
+        <form method="post" action="{% url 'add-rating' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="user">Usuário:</label>
+            <input type="text" class="form-control" id="user" name="user">
+        </div>
+        <div class="form-group">
+            <label for="game">Jogo:</label>
+            <input type="text" class="form-control" id="game" name="game">
+        </div>
+        <div class="form-group">
+            <label for="rating">Nota:</label>
+            <input type="number" class="form-control" id="rating" name="rating" min="0" max="100">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary mr-2">Adicionar</button>
+        </div>
+        </form>
+    </div>
+{% endblock %}

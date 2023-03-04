@@ -12,15 +12,15 @@
 </div>    
 <div class="d-flex justify-content-center" style="height: 100vh;">
     <ul class="list-group">
-        {% for rating in ratings %}
-            <a href="/rating/{{rating.id}}" class="text-decoration-none">
-                <li class="list-group-item">({{ rating.user.username }}) - {{ rating.game.title }} - Nota: {{ rating.rating }}</li>
+        {% for game in games %}
+            <a href="/gamesadm/{{game.id}}" class="text-decoration-none">
+                <li class="list-group-item">{{ game.title }}</li>
             </a>  
             {% empty %}
-            <li class="list-group-item">Nenhum rating cadastrado.</li>
+            <li class="list-group-item">Nenhum game cadastrado.</li>
         {% endfor %}
-        <a href = "/ratingmenu/add/" class="btn btn-primary">Adicionar Avaliação</a>
+        <a href = "/gamesadm/add/" class="btn btn-primary">Adicionar Jogo</a>
     </ul>
-    
 </div>
+    
 {% endblock %}

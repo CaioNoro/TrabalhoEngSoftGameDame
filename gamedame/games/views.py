@@ -208,6 +208,34 @@ def delete_rating(request, rating_id):
     return redirect('/ratingmenu')
 
 @login_required
+def add_rating(request):
+    if request.method == 'POST':
+        user_username = request.POST.get('user')
+        game_title = request.POST.get('game')
+        new_rating = request.POST.get('rating')
+        try:
+            user = User.objects.get(username=user_username)
+        except User.DoesNotExist:
+            messages.error(request, 'Usuário não encontrado.')
+            return redirect('/ratingmenu')
+
+        try:
+            game = Game.objects.get(title=game_title)
+        except Game.DoesNotExist:
+            messages.error(request, 'Jogo não encontrado.')
+            return redirect('/ratingmenu')
+
+        rating = Rating(user=user, game=game, rating=new_rating)
+        rating.save()
+
+        messages.success(request, 'Avaliação adicionada com sucesso.')
+        return redirect('/ratingmenu')
+    else:
+        return render(request, 'games/add-rating.html')
+
+
+
+@login_required
 def update_rating_view(request, rating_id):
     rating = get_object_or_404(Rating, id=rating_id)
 
@@ -234,3 +262,97 @@ def update_rating_view(request, rating_id):
 
     messages.success(request, 'Avaliação atualizada com sucesso.')
     return redirect('/ratingmenu')
+
+@login_required
+def games_menu(request):
+    games = Game.objects.all()
+    return render(request, 'games/games-menu.html', {'games': games})
+
+@login_required
+def game_item(request, game_id):
+    game = get_object_or_404(Game, pk=game_id)
+    return render(request, 'games/game-item-adm.html', {'game': game})
+
+@login_required
+def delete_game(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+    game.delete()
+    return redirect('/gamesmenu')
+
+@login_required
+def update_game_view(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+
+    title = request.POST.get('title')
+    description = request.POST.get('description')
+    price = request.POST.get('price')
+    promotion = request.POST.get('promotion')
+    cover_image = request.FILES.get('cover_image')
+    release_date = request.POST.get('release_date')
+
+    try:
+        if not title:
+            messages.error(request, 'O título do jogo é obrigatório.')
+            return redirect('/gamesmenu')
+        if not description:
+            messages.error(request, 'A descrição do jogo é obrigatória.')
+            return redirect('/gamesmenu')
+        if not price:
+            messages.error(request, 'O preço do jogo é obrigatório.')
+            return redirect('/gamesmenu')
+        if not release_date:
+            messages.error(request, 'A data de lançamento do jogo é obrigatória.')
+            return redirect('/gamesmenu')
+
+        game.title = title
+        game.description = description
+        game.price = price
+        game.promotion = promotion
+        if cover_image:
+            game.cover_image = cover_image
+        game.release_date = release_date
+        game.save()
+
+        messages.success(request, 'Jogo atualizado com sucesso.')
+        return redirect('/gamesmenu')
+    except ValueError as e:
+        messages.error(request, str(e))
+
+@login_required
+def add_game(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        promotion = request.POST.get('promotion')
+        image = request.FILES.get('cover_image')
+        release_date = request.POST.get('release_date')
+
+        if not title:
+            messages.error(request, 'O campo Título é obrigatório.')
+            return redirect('/gamesmenu/')
+        if not description:
+            messages.error(request, 'O campo Descrição é obrigatório.')
+            return redirect('/gamesmenu/')
+        if not price:
+            messages.error(request, 'O campo Preço é obrigatório.')
+            return redirect('/gamesmenu/')
+        if not image:
+            messages.error(request, 'A imagem de capa é obrigatória.')
+            return redirect('/gamesmenu/')
+
+        
+        game = Game(
+            title=title,
+            description=description,
+            price=price,
+            promotion=promotion,
+            cover_image=image,
+            release_date=release_date
+        )
+        game.save()
+
+        messages.success(request, 'Jogo adicionado com sucesso.')
+        return redirect('/gamesmenu/')
+    else:
+        return render(request, 'games/add-game.html')
